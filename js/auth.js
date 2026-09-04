@@ -31,11 +31,18 @@ function registerUser(event) {
         return;
     }
 
+    // Check if passwords match
     if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+        const passwordMatchMessage = document.getElementById("passwordMatchMessage");
+
+        passwordMatchMessage.textContent = "✗ Passwords do not match.";
+        passwordMatchMessage.classList.add("no-match");
+        passwordMatchMessage.classList.remove("match");
+
         return;
     }
 
+    // Check password length
     if (password.length < 6) {
         alert("Password must be at least 6 characters.");
         return;
@@ -43,6 +50,7 @@ function registerUser(event) {
 
     const users = getUsers();
 
+    // Check if email already exists
     const existingUser = users.find(
         user => user.email.toLowerCase() === email.toLowerCase()
     );
@@ -52,13 +60,15 @@ function registerUser(event) {
         return;
     }
 
+    // Create new user
     const newUser = {
-    id: Date.now(),
-    fullName: fullName,
-    email: email,
-    password: password,
-    role: role
-};
+        id: Date.now(),
+        fullName: fullName,
+        email: email,
+        password: password,
+        role: role
+    };
+
     users.push(newUser);
     saveUsers(users);
 
@@ -167,6 +177,7 @@ if (registerForm) {
     registerForm.addEventListener("submit", registerUser);
 }
 
+
 // ======================================
 // CONNECT LOGOUT BUTTON
 // ======================================
@@ -176,6 +187,8 @@ const logoutButton = document.getElementById("logoutButton");
 if (logoutButton) {
     logoutButton.addEventListener("click", logoutUser);
 }
+
+
 // ======================================
 // SHOW / HIDE PASSWORD
 // ======================================
@@ -195,4 +208,147 @@ if (togglePassword && loginPassword) {
         }
 
     });
+}
+
+
+// ======================================
+// PASSWORD STRENGTH CHECKER
+// ======================================
+
+const registerPassword = document.getElementById("registerPassword");
+const strengthBar = document.getElementById("strengthBar");
+const passwordStrength = document.getElementById("passwordStrength");
+
+if (registerPassword && strengthBar && passwordStrength) {
+
+    registerPassword.addEventListener("input", function () {
+
+        const password = registerPassword.value;
+
+        let strength = 0;
+
+        // Check password length
+        if (password.length >= 8) {
+            strength++;
+        }
+
+        // Check for lowercase letters
+        if (/[a-z]/.test(password)) {
+            strength++;
+        }
+
+        // Check for uppercase letters
+        if (/[A-Z]/.test(password)) {
+            strength++;
+        }
+
+        // Check for numbers
+        if (/[0-9]/.test(password)) {
+            strength++;
+        }
+
+        // Check for special characters
+        if (/[^A-Za-z0-9]/.test(password)) {
+            strength++;
+        }
+
+
+        // Reset when password is empty
+        if (password.length === 0) {
+
+            strengthBar.style.width = "0%";
+
+            passwordStrength.innerHTML =
+                'Password strength: <span>None</span>';
+        }
+
+
+        // Weak password
+        else if (strength <= 2) {
+
+            strengthBar.style.width = "33%";
+            strengthBar.style.backgroundColor = "#ef4444";
+
+            passwordStrength.innerHTML =
+                'Password strength: <span>Weak</span>';
+        }
+
+
+        // Medium password
+        else if (strength <= 4) {
+
+            strengthBar.style.width = "66%";
+            strengthBar.style.backgroundColor = "#f59e0b";
+
+            passwordStrength.innerHTML =
+                'Password strength: <span>Medium</span>';
+        }
+
+
+        // Strong password
+        else {
+
+            strengthBar.style.width = "100%";
+            strengthBar.style.backgroundColor = "#22c55e";
+
+            passwordStrength.innerHTML =
+                'Password strength: <span>Strong</span>';
+        }
+
+    });
+}
+
+
+// ======================================
+// CONFIRM PASSWORD VALIDATION
+// ======================================
+
+const confirmPassword = document.getElementById("confirmPassword");
+const passwordMatchMessage = document.getElementById("passwordMatchMessage");
+
+if (confirmPassword && registerPassword && passwordMatchMessage) {
+
+    confirmPassword.addEventListener("input", function () {
+
+        const password = registerPassword.value;
+        const confirm = confirmPassword.value;
+
+
+        // Nothing typed yet
+        if (confirm.length === 0) {
+
+            passwordMatchMessage.textContent = "";
+
+            passwordMatchMessage.classList.remove(
+                "match",
+                "no-match"
+            );
+        }
+
+
+        // Passwords match
+        else if (password === confirm) {
+
+            passwordMatchMessage.textContent =
+                "✓ Passwords match.";
+
+            passwordMatchMessage.classList.add("match");
+
+            passwordMatchMessage.classList.remove("no-match");
+        }
+
+
+        // Passwords do not match
+        else {
+
+            passwordMatchMessage.textContent =
+                "✗ Passwords do not match.";
+
+            passwordMatchMessage.classList.add("no-match");
+
+            passwordMatchMessage.classList.remove("match");
+        }
+
+    });
+
 }

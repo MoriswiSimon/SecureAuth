@@ -363,3 +363,55 @@ body {
 #togglePassword:hover {
     color: #93c5fd;
 }
+
+/* ======================================
+   PASSWORD STRENGTH
+====================================== */
+
+.password-strength {
+    margin-top: 8px;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#strengthBar {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+#passwordStrength {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
+#passwordStrength span {
+    font-weight: 600;
+}
+
+/* ======================================
+   PASSWORD MATCH MESSAGE
+====================================== */
+
+.password-match-message {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    min-height: 18px;
+}
+
+.password-match-message.match {
+    color: #22c55e;
+}
+
+.password-match-message.no-match {
+    color: #ef4444;
+}
