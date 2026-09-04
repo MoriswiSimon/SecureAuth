@@ -111,9 +111,30 @@ function loginUser(event) {
     message.textContent = "Login successful!";
     message.className = "message success";
 
-    setTimeout(() => {
+  setTimeout(() => {
+
+    if (user.role === "Admin") {
+        window.location.href = "admin-dashboard.html";
+    }
+
+    else if (user.role === "Supervisor") {
+        window.location.href = "supervisor-dashboard.html";
+    }
+
+    else if (user.role === "Employee") {
+        window.location.href = "employee-dashboard.html";
+    }
+
+    else if (user.role === "Learner") {
+        window.location.href = "learner-dashboard.html";
+    }
+
+    else {
         window.location.href = "dashboard.html";
-    }, 1000);
+    }
+
+}, 1000);
+
 }
 
 
