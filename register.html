@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SecureAuth | Register</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body>
+
+    <main class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <p>Register to get started</p>
+            </div>
+
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create a password"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="registerRole">AccountRole</label>
+
+                    <select id="registerRole" required>
+                        <option value="">Select your role</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Learner">Learner</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="Admin">Admin</option>
+
+                    </select>
+                </div>
+
+                <button type="submit" class="auth-button">
+                    Create Account
+                </button>
+
+                <p id="registerMessage" class="message"></p>
+
+            </form>
+
+            <div class="auth-footer">
+
+                <p>
+                    Already have an account?
+                    <a href="index.html">Login</a>
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>
